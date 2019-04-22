@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -18,17 +20,25 @@ class Product extends Component {
     return (
       <ProductConsumer>
         {(context) => {
-          const { handleDetails, addToCart } = context;
+          const { handleDetails, addToCart, openModal } = context;
 
           return (
             <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
               <div className="card">
 
-                <div className="img-container p-5" onClick={() => handleDetails(id)}>
+                <div role="button" className="img-container p-5" onClick={() => handleDetails(id)}>
                   <Link to="/details">
                     <img src={img} alt="product" className="card-img-top" />
                   </Link>
-                  <button type="button" className="cart-btn" disabled={!!inCart} onClick={() => addToCart(id)}>
+                  <button
+                    type="button"
+                    className="cart-btn"
+                    disabled={!!inCart} 
+                    onClick={() => {
+                      addToCart(id);
+                      openModal(id);
+                    }}
+                  >
                     {inCart ? (<p className="text-capitalize mb-0" disabled>in cart</p>) : <i className="fa fa-cart-plus" />}
                   </button>
                 </div>

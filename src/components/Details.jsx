@@ -18,6 +18,11 @@ class Details extends Component {
             inCart,
           } = context.detailProduct;
 
+          const {
+            addToCart,
+            openModal,
+          } = context;
+
           return (
             <div className="container py-5">
               {/* title */}
@@ -56,7 +61,8 @@ class Details extends Component {
                       cart
                       disabled={!!inCart}
                       onClick={() => {
-                        context.addToCart(id);
+                        addToCart(id);
+                        openModal(id);
                       }}
                     >
                       {inCart ? 'inCart' : 'add to cart'}
