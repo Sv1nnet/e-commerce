@@ -13,12 +13,13 @@ export default class Cart extends Component {
         <ProductConsumer>
           {(context) => {
             const { cart } = context;
+            const { props } = this;
             return cart.length > 0 ? (
               <>
                 <Title name="your" title="cart" />
                 <CartColumns />
                 <CartList value={context} />
-                <CartTotal value={context} />
+                <CartTotal value={context} history={props.history} />
               </>
             ) : (
               <>
